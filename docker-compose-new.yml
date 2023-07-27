@@ -1,0 +1,32 @@
+version: '3.9'
+networks:
+  basic:
+services:
+  front:
+    build:
+      context: ./
+      dockerfile: Dockerfile.frontend
+    container_name: greaterwms_front
+    restart: always
+    privileged: true
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+    networks:
+      - basic
+  backend:
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile.backend
+    container_name: greaterwms_backend
+    image: greaterwms/greaterwms:backend
+    restart: always
+    privileged: true
+    volumes:
+      - ./:/GreaterWMS/:rw
+      - ./supervisord.conf:/etc/supervisor/supervisord.conf
+    environment:
+      PYTHONUNBUFFERED: 1
+    networks:
+      - basic
