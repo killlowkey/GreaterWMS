@@ -115,11 +115,11 @@ CSRF_COOKIE_SAMESITE = None
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wms',                                  # 数据库名称
-        'USER': 'root',                                 # 数据库登录用户名
-        'PASSWORD': 'otyAQox9q99RPhT2XSX^GxVm4QmQkx',   # 密码
-        'HOST': '127.0.0.1',                            # 数据库主机IP，如保持默认，则为127.0.0.1
-        'PORT': 3306,                                   # 数据库端口号，如保持默认，则为3306
+        'NAME': os.environ.get('MYSQL_DATABASE', 'wms'),
+        'USER': os.environ.get('MYSQL_USER', 'root'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'otyAQox9q99RPhT2XSX^GxVm4QmQkx'),
+        'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'database'),
+        'PORT': os.environ.get('MYSQL_DATABASE_PORT', 3306),
     }
 }
 

@@ -29,6 +29,7 @@ services:
     volumes:
       - ./:/GreaterWMS/:rw
       - ./supervisord.conf:/etc/supervisor/supervisord.conf
+    env_file: .env
     environment:
       PYTHONUNBUFFERED: 1
     networks:
