@@ -37,8 +37,7 @@ services:
   database:
     image: mysql:5.7
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: otyAQox9q99RPhT2XSX^GxVm4QmQkx
+    env_file: .env
     volumes:
       - ./.docker/database:/var/lib/mysql
       - ./.docker/my.cnf:/etc/mysql/my.cnf
