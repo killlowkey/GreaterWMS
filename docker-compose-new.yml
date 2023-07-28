@@ -19,11 +19,11 @@ services:
     networks:
       - basic
   backend:
-    # build:
-    #   context: ./
-    #   dockerfile: Dockerfile.backend
+    build:
+      context: ./
+      dockerfile: Dockerfile.backend
     container_name: greaterwms_backend
-    image: greaterwms/greaterwms:backend
+    # image: greaterwms/greaterwms:backend
     restart: always
     privileged: true
     volumes:

@@ -101,13 +101,25 @@ CSRF_COOKIE_SAMESITE = None
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # update
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'OPTIONS': {
+#             'timeout': 20,
+#         }
+#     }
+# }
+
+# https://zhuanlan.zhihu.com/p/105717817
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {
-            'timeout': 20,
-        }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'wms',                                  # 数据库名称
+        'USER': 'root',                                 # 数据库登录用户名
+        'PASSWORD': 'otyAQox9q99RPhT2XSX^GxVm4QmQkx',   # 密码
+        'HOST': '127.0.0.1',                            # 数据库主机IP，如保持默认，则为127.0.0.1
+        'PORT': 3306,                                   # 数据库端口号，如保持默认，则为3306
     }
 }
 
