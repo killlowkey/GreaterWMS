@@ -11,7 +11,7 @@ services:
     restart: always
     privileged: true
     volumes:
-      - ./.docker/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./.docker/nginx.conf:/etc/nginx/nginx.conf
       - ./.docker/baseurl.txt:/usr/share/nginx/html/statics/baseurl.txt
     ports:
       - '80:80'
