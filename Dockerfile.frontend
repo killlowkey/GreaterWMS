@@ -24,12 +24,12 @@ COPY ./.docker/code/MainLayout.vue /app/src/layouts/MainLayout.vue
 RUN find /app/src/i18n -type f -name "index.js" -exec sed -i 's/GreaterWMS/OnlineCargoWMS/g' {} +
 
 # npm 修改国内源
-# RUN npm config set registry https://registry.npm.taobao.org
+# RUN npm config set registry https://registry.npmmirror.com
 RUN npm install -g yarn --force
 RUN npm install -g @quasar/cli --force
 
 # yarn 修改国内源
-# RUN yarn config set registry https://registry.npm.taobao.org
+# RUN yarn config set registry https://registry.npmmirror.com
 
 # install all package
 RUN yarn install
