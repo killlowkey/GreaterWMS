@@ -1,0 +1,49 @@
+version: '3.9'
+networks:
+  basic:
+services:
+  frontend:
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile.frontend
+    container_name: wms_frontend  
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms_frontend:latest 
+    restart: always
+    privileged: true
+    volumes:
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./.docker/baseurl.txt:/usr/share/nginx/html/statics/baseurl.txt
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+    networks:
+      - basic
+  backend:
+    # build:
+    #   context: ./
+    #   dockerfile: Dockerfile.backend
+    container_name: wms_backend
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms_backend:latest
+    restart: always
+    privileged: true
+    volumes:
+      - ./:/GreaterWMS/:rw
+      - ./supervisord.conf:/etc/supervisor/supervisord.conf
+    env_file: .env
+    environment:
+      PYTHONUNBUFFERED: 1
+    networks:
+      - basic
+  database:
+    image: mysql:5.7
+    restart: always
+    env_file: .env
+    volumes:
+      - ./.docker/database:/var/lib/mysql
+      - ./.docker/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    command: '--default-authentication-plugin=mysql_native_password' 
+    networks:
+      - basic

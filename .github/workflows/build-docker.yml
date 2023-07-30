@@ -1,0 +1,60 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md' # Exclude certain files from triggering the workflow on push
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check commit message for release tag
+        id: check_release
+        run: echo "::set-output name=release_tag::$(echo ${{ github.event.head_commit.message }} | grep -oP '(?<=release: v)\d+\.\d+')"
+
+      - name: Check if commit message starts with "release"
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" != release:* ]]; then
+            echo "Commit message does not start with 'release:' keyword. Stopping the build."
+            exit 1
+          fi
+
+      - name: Extract version number
+        id: extract_version
+        run: |
+          VERSION=$(echo ${{ github.event.head_commit.message }} | sed -n 's/release: v\([0-9]\+\.[0-9]\+\)/\1/p')
+          echo "::set-output name=version::${VERSION}"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push frontend Docker image
+        env:
+          HOST: ${{ secrets.HOST }}
+          NAMESPACE: ${{ secrets.NAMESPACE }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          VERSION=${{ steps.extract_version.outputs.version }}
+          docker build -t $HOST/$NAMESPACE/wms-frontend:${VERSION} -f Dockerfile.frontend .
+          docker login $HOST -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push $HOST/$NAMESPACE/wms-frontend:${VERSION}
+
+      - name: Build and push backend Docker image
+        env:
+          HOST: ${{ secrets.HOST }}
+          NAMESPACE: ${{ secrets.NAMESPACE }} 
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          VERSION=${{ steps.extract_version.outputs.version }}
+          docker build -t $HOST/$NAMESPACE/wms-backend:${VERSION} -f Dockerfile.backend .
+          docker login $HOST -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push $HOST/$NAMESPACE/wms-backend:${VERSION}
