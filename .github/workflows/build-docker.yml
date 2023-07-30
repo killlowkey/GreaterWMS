@@ -3,12 +3,12 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - main
+      - master
     paths-ignore:
       - 'README.md' # Exclude certain files from triggering the workflow on push
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build_and_push:
