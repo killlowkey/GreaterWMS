@@ -29,7 +29,7 @@ RUN npm install -g yarn --force
 RUN npm install -g @quasar/cli --force
 
 # yarn 修改国内源
-RUN yarn config set registry https://registry.npm.taobao.org/
+# RUN yarn config set registry https://registry.npm.taobao.org
 
 # install all package
 RUN yarn install
