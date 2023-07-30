@@ -777,7 +777,7 @@ export default {
         { value: 'it', label: 'Italiano' },
         { value: 'ja', label: '日本語' }
       ],
-      title: this.$t('index.webtitle'),
+      title: 'OnlineCargoWMS',
       admin: false,
       adminlogin: {
         name: '',
