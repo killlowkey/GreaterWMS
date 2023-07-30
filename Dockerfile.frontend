@@ -20,6 +20,8 @@ RUN rm -rf /app/dist
 
 # 代码修改操作
 COPY ./.docker/code/MainLayout.vue /app/src/layouts/MainLayout.vue
+COPY ./.docker/code/index.vue /app/src/pages/index.vue
+
 # 使用 find 和 sed 替换文本
 RUN find /app/src/i18n -type f -name "index.js" -exec sed -i 's/GreaterWMS/OnlineCargoWMS/g' {} +
 

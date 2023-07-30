@@ -469,7 +469,9 @@
             <q-item-section>{{ $t("menuItem.downloadcenter") }}</q-item-section>
           </q-item>
           <q-separator/>
-          <q-item
+
+          <!-- 万仓互联想 -->
+          <!-- <q-item
             clickable
             :to="{ name: 'warehouselist' }"
             @click="linkChange('warehouselist')"
@@ -482,7 +484,8 @@
               <q-icon name="warehouse"/>
             </q-item-section>
             <q-item-section>{{ $t("menuItem.cloudwarehouse") }}</q-item-section>
-          </q-item>
+          </q-item> -->
+          
         </q-list>
       </q-scroll-area>
     </q-drawer>
