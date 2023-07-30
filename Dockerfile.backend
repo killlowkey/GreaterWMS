@@ -20,6 +20,9 @@ COPY ./backend_start.sh /GreaterWMS/backend_start.sh
 WORKDIR /GreaterWMS
 COPY . .
 
+# 删除不需要的目录
+RUN rm -rf /GreaterWMS/app
+
 ENV port = ${port}
 
 #Configure pip3 Alibaba Source
