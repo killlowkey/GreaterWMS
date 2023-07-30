@@ -15,10 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check commit message for release tag
-        id: check_release
-        run: echo "::set-output name=release_tag::$(echo ${{ github.event.head_commit.message }} | grep -oP '(?<=release: v)\d+\.\d+')"
-
       - name: Check if commit message starts with "release"
         run: |
           if [[ "${{ github.event.head_commit.message }}" != release:* ]]; then
