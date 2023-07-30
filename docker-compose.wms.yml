@@ -29,7 +29,7 @@ services:
     privileged: true
     volumes:
       - ./.docker/supervisord.conf:/etc/supervisor/supervisord.conf
-    env_file: .env
+    env_file: ./.dcoker/.env
     environment:
       PYTHONUNBUFFERED: 1
     networks:
@@ -37,7 +37,7 @@ services:
   database:
     image: mysql:5.7
     restart: always
-    env_file: .env
+    env_file: ./.dcoker/.env
     volumes:
       - ./.docker/database:/var/lib/mysql
       - ./.docker/my.cnf:/etc/mysql/my.cnf
