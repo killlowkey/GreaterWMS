@@ -37,6 +37,7 @@ services:
   database:
     image: mysql:5.7
     restart: always
+    container_name: wms_database
     env_file: ./.dcoker/.env
     volumes:
       - ./.docker/database:/var/lib/mysql
