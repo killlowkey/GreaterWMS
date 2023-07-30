@@ -39,6 +39,9 @@ RUN yarn install
 # output: /app/dist/spa
 RUN quasar build
 
+# 修改文字
+RUN sed -i 's/GreaterWMS--Open Source Warehouse Management System/OnlineCargoWMS/g' /app/dist/spa/index.html
+
 # Use the official Nginx base image
 FROM nginx:latest
 
