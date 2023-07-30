@@ -1,5 +1,15 @@
 FROM node:14.19.3-buster-slim AS front-builder
 
+# 设置国内源
+# RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+# RUN sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+# RUN apt-get clean
+
+# 安装必要的工具
+RUN apt-get update && apt-get install -y \
+    findutils \
+    sed
+
 WORKDIR /app
 # 拷贝前端依赖
 COPY ./templates/package.json /app/package.json
@@ -7,6 +17,11 @@ COPY ./templates/package.json /app/package.json
 COPY ./templates/ /app
 # 删除之前打包文件
 RUN rm -rf /app/dist
+
+# 代码修改操作
+COPY ./docker/code/MainLayout.vue /app/src/layouts/MainLayout.vue
+# 使用 find 和 sed 替换文本
+RUN find /app/src/i18n -type f -name "index.js" -exec sed -i 's/GreaterWMS/OnlineCargoWMS/g' {} +
 
 #RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install -g yarn --force
