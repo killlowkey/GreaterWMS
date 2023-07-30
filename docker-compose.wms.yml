@@ -7,7 +7,7 @@ services:
     #   context: ./
     #   dockerfile: Dockerfile.frontend
     container_name: wms_frontend  
-    image: uswccr.ccs.tencentyun.com/onlinecargo/wms_frontend:latest 
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-frontend:1.0 
     restart: always
     privileged: true
     volumes:
@@ -24,7 +24,7 @@ services:
     #   context: ./
     #   dockerfile: Dockerfile.backend
     container_name: wms_backend
-    image: uswccr.ccs.tencentyun.com/onlinecargo/wms_backend:latest
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-backend:1.0
     restart: always
     privileged: true
     volumes:
