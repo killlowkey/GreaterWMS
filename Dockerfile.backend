@@ -8,12 +8,8 @@ FROM --platform=linux/amd64 python:3.8.10-slim AS backend
 # MySQL 环境需要
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+    && apt-get install -y gcc default-libmysqlclient-dev pkg-config vim build-essential supervisor \
     && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update --fix-missing && apt-get upgrade -y
-RUN apt-get install build-essential -y
-RUN apt-get install supervisor -y
 
 RUN mkdir -p /GreaterWMS/templates
 #copy requirements.txt
@@ -22,8 +18,9 @@ COPY ./backend_start.sh /GreaterWMS/backend_start.sh
 
 #Configure working directory
 WORKDIR /GreaterWMS
-ENV port = ${port}
+CPOY . .
 
+ENV port = ${port}
 
 #Configure pip3 Alibaba Source
 #RUN pip3 config set global.index-url http://mirrors.aliyun.com/pypi/simple/
