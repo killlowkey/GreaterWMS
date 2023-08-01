@@ -7,7 +7,7 @@ services:
     #   context: ./
     #   dockerfile: Dockerfile.frontend
     container_name: wms_frontend  
-    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-frontend:1.1
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-frontend:1.2
     restart: always
     privileged: true
     volumes:
@@ -24,12 +24,12 @@ services:
     #   context: ./
     #   dockerfile: Dockerfile.backend
     container_name: wms_backend
-    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-backend:1.1
+    image: uswccr.ccs.tencentyun.com/onlinecargo/wms-backend:1.2
     restart: always
     privileged: true
     volumes:
       - ./.docker/supervisord.conf:/etc/supervisor/supervisord.conf
-    env_file: ./.dcoker/.env
+    env_file: ./.docker/.env
     environment:
       PYTHONUNBUFFERED: 1
     networks:
@@ -38,7 +38,7 @@ services:
     image: mysql:5.7
     restart: always
     container_name: wms_database
-    env_file: ./.dcoker/.env
+    env_file: ./.docker/.env
     volumes:
       - ./.docker/database:/var/lib/mysql
       - ./.docker/my.cnf:/etc/mysql/my.cnf

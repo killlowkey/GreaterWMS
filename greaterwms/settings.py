@@ -115,11 +115,11 @@ CSRF_COOKIE_SAMESITE = None
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'wms'),
-        'USER': os.environ.get('MYSQL_USER', 'root'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'otyAQox9q99RPhT2XSX^GxVm4QmQkx'),
-        'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'database'),
-        'PORT': os.environ.get('MYSQL_DATABASE_PORT', 3306),
+        'NAME': os.environ.get('APP_MYSQL_DATABASE', 'wms'),
+        'USER': os.environ.get('APP_MYSQL_USER', 'root'),
+        'PASSWORD': os.environ.get('APP_MYSQL_PASSWORD', 'otyAQox9q99RPhT2XSX^GxVm4QmQkx'),
+        'HOST': os.environ.get('App_MYSQL_DATABASE_HOST', 'database'),
+        'PORT': os.environ.get('APP_MYSQL_DATABASE_PORT', 3306),
     }
 }
 
