@@ -58,6 +58,7 @@ COPY ./media /user/share/nginx/media
 
 # Expose port 80 for Nginx
 EXPOSE 80
+EXPOSE 443
 
 # Start Nginx when the container launches
 CMD ["nginx", "-g", "daemon off;"]
